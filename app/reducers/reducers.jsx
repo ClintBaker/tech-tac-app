@@ -1,7 +1,14 @@
-export var animalReducer = (state = '', action) => {
+export var authReducer = (state = {}, action) => {
   switch(action.type) {
-    case 'SET_ANIMAL':
-      return action.animal;
+    case 'SIGNUP':
+      return {
+        ...state,
+        id: action.id,
+        token: action.token,
+        isAdmin: action.isAdmin
+      };
+    case 'LOGOUT':
+      return {};
     default:
       return state;
   };

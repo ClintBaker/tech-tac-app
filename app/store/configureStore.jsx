@@ -1,11 +1,11 @@
 import * as redux from 'redux';
 import thunk from 'redux-thunk';
 
-import {animalReducer} from 'reducers';
+import {authReducer} from 'reducers';
 
 export var configure = (initialState = {}) => {
   var reducer = redux.combineReducers({
-    animal: animalReducer
+    auth: authReducer
   });
 
 

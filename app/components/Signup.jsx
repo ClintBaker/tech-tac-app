@@ -8,7 +8,8 @@ class Signup extends React.Component {
     this.onSignup = this.onSignup.bind(this);
 
   }
-  onSignup () {
+  onSignup (e) {
+    e.preventDefault();
     var {dispatch} = this.props;
     var password = this.refs.password.value;
     var password2 = this.refs.password2.value;
@@ -22,7 +23,7 @@ class Signup extends React.Component {
     var city = this.refs.city.value;
     var state = this.refs.state.value;
     var zip = this.refs.zip.value;
-    var country = this.refs.country.value;
+    var country = "USA";
 
     var newUser = {
       password,
@@ -38,6 +39,7 @@ class Signup extends React.Component {
       zip,
       country
     };
+    console.log(newUser);
 
     dispatch(actions.startSignup(newUser));
   }
@@ -59,11 +61,11 @@ class Signup extends React.Component {
                 <input type="text" placeholder="city" ref="city" />
                 <input type="text" placeholder="state / province / region" ref="state" />
                 <input type="text" placeholder="zip or postal code" ref="zip" />
-                <select ref="country">
+                {/* <select ref="country">
                   <option value="United States" ref="country">United States</option>
                   <option value="Canada" ref="country">Canada</option>
                   <option value="Mexico" ref="country">Mexico</option>
-                </select>
+                </select> */}
                 {/* <input type="url" placeholder="country" ref="companyName" /> */}
                 <button className="button">Submit</button>
               </form>
