@@ -10,6 +10,7 @@ export default (
     <Route path="/">
       <Route path="signup" component={Signup} />
       <Route path="main" component={Main} />
+      <Route path="cart" />
       <IndexRoute component={Landing} />
     </Route>
   </Router>

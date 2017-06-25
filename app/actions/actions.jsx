@@ -71,3 +71,38 @@ export var startLogout = () => {
     })
   }
 };
+
+export var addToCart = (quantity, partId) => {
+  return {
+    type: 'ADD_TO_CART',
+    quantity,
+    partId,
+    _id: (partId + Math.random() * 2)
+  }
+};
+
+export var getParts = (parts) => {
+  return {
+    type: 'GET_PARTS',
+    parts
+  }
+};
+
+export var startGetProducts = () => {
+  return (dispatch, getState) => {
+    const {auth} = getState();
+    return axios.get(`${baseURL}/parts`, {
+      headers: {'x-auth': auth.token}
+    }).then((res) => {
+      var parts = res.data.parts;
+      dispatch(getParts(parts));
+    }).catch((e) => {
+      alert(e);
+    });
+  }
+};
+
+
+// rm -rf node_modules
+// rm package-lock.json
+// npm install
