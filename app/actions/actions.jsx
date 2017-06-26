@@ -152,9 +152,32 @@ export var startNewOrder = (cart) => {
     }).then((res) => {
       alert('Successfully placed order');
       dispatch(clearCart());
-      hashHistory.push('/main');
+      hashHistory.push('/orders');
     }).catch((e) => {
       alert('Unable to place order');
+    });
+  };
+};
+
+export var populateOrders = (orders) => {
+  return {
+    type: 'POPULATE_ORDERS',
+    orders
+  }
+};
+
+export var startPopulateOrders = () => {
+  return (dispatch, getState) => {
+    var {auth} = getState();
+
+    return axios.get(`${baseURL}/orders`, {
+      headers: {
+        'x-auth': auth.token
+      }
+    }).then((res) => {
+      dispatch(populateOrders(res.data.orders));
+    }).catch((e) => {
+      console.log(e);
     });
   };
 };
