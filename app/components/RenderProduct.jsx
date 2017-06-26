@@ -14,10 +14,7 @@ class RenderProduct extends React.Component {
 
     var quantity = this.refs.quantity.value;
     var partNumber = this.refs.partNumber.value;
-    this.refs.partNumber.value = '';
     this.refs.quantity.value = '';
-    console.log('quantity:' + quantity);
-    console.log('partNumber' + partNumber);
 
     dispatch(actions.addToCart(quantity, partNumber));
   }

@@ -20,7 +20,7 @@ class Nav extends React.Component {
         <div className="top-bar-left">
           <ul className="menu">
             <li className="menu-text title-text">Tech Tac Interactive</li>
-            <li><Link to="/" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Products</Link></li>
+            <li><Link to="/main" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Products</Link></li>
             <li><Link to="/" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Advantages of Slimline</Link></li>
             <li><Link to="/" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>FAQ</Link></li>
             <li><Link to="/" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Contact</Link></li>

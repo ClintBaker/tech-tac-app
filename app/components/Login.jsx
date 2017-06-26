@@ -15,8 +15,6 @@ class Login extends React.Component {
     var password = this.refs.password.value;
     var email = this.refs.email.value;
 
-    console.log(email, password);
-
     dispatch(actions.startLogin(email, password));
   }
   render () {

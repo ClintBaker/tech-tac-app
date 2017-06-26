@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {hashHistory} from 'react-router';
+import _ from 'lodash';
 
 const baseURL = 'https://powerful-badlands-45228.herokuapp.com';
 
@@ -77,7 +78,7 @@ export var addToCart = (quantity, partId) => {
     type: 'ADD_TO_CART',
     quantity,
     partId,
-    _id: (partId + Math.random() * 2)
+    _id: (partId + (new Date()).getTime())
   }
 };
 
@@ -102,7 +103,58 @@ export var startGetProducts = () => {
   }
 };
 
+export var updateCart = (newCart) => {
+  return {
+    type: 'UPDATE_CART',
+    newCart
+  }
+};
 
-// rm -rf node_modules
-// rm package-lock.json
-// npm install
+export var startRemoveFromCart = (id) => {
+  return (dispatch, getState) => {
+    const {cart} = getState();
+    var newCart = [];
+    cart.map((part) => {
+      if (part._id !== id) {
+        return newCart.push(part);
+      }
+    });
+    dispatch(updateCart(newCart));
+    alert('Item Successfully Removed');
+  };
+};
+
+export var clearCart = () => {
+  return {
+    type: 'CLEAR_CART'
+  }
+};
+
+export var startNewOrder = (cart) => {
+  return (dispatch, getState) => {
+    var {auth} = getState();
+    var newCart = [];
+
+    cart.map((obj) => {
+      newCart.push({_partId: obj._partId, quantity: obj.quantity})
+    });
+
+    var data = {
+      parts: newCart,
+      _companyId: auth.id
+    };
+    var newData = JSON.stringify(data);
+
+    return axios.post(`${baseURL}/orders`, data, {
+      headers: {
+        'x-auth': auth.token
+      }
+    }).then((res) => {
+      alert('Successfully placed order');
+      dispatch(clearCart());
+      hashHistory.push('/main');
+    }).catch((e) => {
+      alert('Unable to place order');
+    });
+  };
+};

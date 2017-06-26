@@ -35,9 +35,8 @@ class SideNav extends React.Component {
         <div>
             <ul className="menu vertical">
               <li><a href="#">My Profile</a></li>
-              <li><a href="#">My Cart</a></li>
+              <li><Link to="/cart" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>My Cart</Link></li>
               <li><a href="#">Manage Orders</a></li>
-              <li><a href="#">Manage Products</a></li>
               <li><a onClick={this.onClick}>Logout</a></li>
             </ul>
             {this.renderAdmin()}

@@ -9,23 +9,9 @@ class Products extends React.Component {
   constructor(props) {
     super(props);
     this.renderProducts = this.renderProducts.bind(this);
-    this.formSubmit = this.formSubmit.bind(this);
 
     var {dispatch} = this.props;
     dispatch(actions.startGetProducts());
-  }
-  formSubmit(e) {
-    e.preventDefault();
-    var {dispatch} = this.props;
-
-    var quantity = this.refs.quantity.value;
-    var partNumber = this.refs.partNumber.value;
-    this.refs.partNumber.value = '';
-    this.refs.quantity.value = '';
-    console.log('quantity:' + quantity);
-    console.log('partNumber' + this.refs.partNumber.value);
-
-    dispatch(actions.addToCart(quantity, partNumber));
   }
   renderProducts() {
     var {parts} = this.props;

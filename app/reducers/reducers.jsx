@@ -30,10 +30,14 @@ export var cartReducer = (state = [], action) => {
         ...state,
         {
           quantity: action.quantity,
-          partId: action.partId,
+          _partId: action.partId,
           _id: action._id
         }
       ];
+    case 'UPDATE_CART':
+      return action.newCart;
+    case 'CLEAR_CART':
+      return [];
     default:
       return state;
   };
