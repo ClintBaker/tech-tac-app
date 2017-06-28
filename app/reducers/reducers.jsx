@@ -3,20 +3,16 @@ export var authReducer = (state = {}, action) => {
     case 'SIGNUP':
       return {
         ...state,
-        id: action.id,
+        id: action.userData._id,
         token: action.token,
-        isAdmin: action.isAdmin
+        isAdmin: action.userData.isAdmin,
+        email: action.userData.email,
+        companyName: action.userData.companyName,
+        phone: action.userData.phone,
+        url: action.userData.url,
+        contactName: action.userData.contactName,
+        address: action.userData.address
       };
-    case 'UPDATE':
-      return {
-        ...state,
-        email: action.user.id,
-        companyName: action.user.companyName,
-        phone: action.user.phone,
-        url: action.user.url,
-        contactName: action.user.contactName,
-        address: action.user.address
-      }
     case 'LOGOUT':
       return {};
     default:

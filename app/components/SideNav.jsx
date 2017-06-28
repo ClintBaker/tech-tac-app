@@ -31,12 +31,12 @@ class SideNav extends React.Component {
     }
   }
   render () {
-    var {cart} = this.props;
+    var {cart, auth} = this.props;
     var cartNum = cart.length;
     return (
         <div>
             <ul className="menu vertical">
-              <li style={{fontWeight: 'bold'}}>Username</li>
+              <li style={{fontWeight: 'bold'}}>{auth.companyName ? auth.companyName : auth.email}</li>
               <li><Link to="/profile" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Company Profile</Link></li>
               <li><Link to="/cart" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Cart {cartNum > 0 ? <span className="badge success">{cartNum}</span> : ''}</Link></li>
               <li><Link to="/orders" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Manage Orders</Link></li>

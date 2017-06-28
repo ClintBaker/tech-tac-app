@@ -51,51 +51,51 @@ class Profile extends React.Component {
 
       }
     };
-    if (password.length > 0) {
+    if (password.length > 1) {
       user.password = password;
     }
 
-    if (email.length > 0) {
+    if (email.length > 1) {
       user.email = email;
     }
 
-    if (companyName.length > 0) {
+    if (companyName.length > 1) {
       user.companyName = companyName;
     }
 
-    if (phone.length > 0) {
+    if (phone.length > 1) {
       user.phone = phone;
     }
 
-    if (url.length > 0) {
+    if (url.length > 1) {
       user.url = url;
     }
 
-    if (contactName.length > 0) {
+    if (contactName.length > 1) {
       user.contactName = contactName;
     }
 
-    if (addressLine1.length > 0) {
+    if (addressLine1.length > 1) {
       user.address.addressLine1 = addressLine1;
     }
 
-    if (addressLine2.length > 0) {
+    if (addressLine2.length > 1) {
       user.address.addressLine2 = addressLine2;
     }
 
-    if (city.length > 0) {
+    if (city.length > 1) {
       user.address.city = city;
     }
 
-    if (state.length > 0) {
+    if (state.length > 1) {
       user.address.state = state;
     }
 
-    if (zip.length > 0) {
+    if (zip.length > 1) {
       user.address.zip = zip;
     }
 
-    if (country.length > 0) {
+    if (country.length > 1) {
       user.address.country = country;
     }
 
@@ -104,10 +104,11 @@ class Profile extends React.Component {
         return alert('Passwords must match');
       }
     }
-
-    dispatch(actions.startUpdateUser(newUser));
+    console.log(user);
+    dispatch(actions.startUpdateUser(user));
   }
   render () {
+    var {auth} = this.props;
     return (
 
       <div>
@@ -117,25 +118,92 @@ class Profile extends React.Component {
         </div>
         <div className="small-offset-3 small-8 medium-offset-3 medium-6 large-offset-3 large-7 center main">
           <div className="callout">
-            <h2 className="title-text">Company Profile</h2>
+            <h2 className="title-text">{auth.companyName ? auth.companyName : 'Company Profile'}</h2>
             <p>Manage your profile</p>
           </div>
           <div>
               <div className="callout">
-                  <h3>Edit profile</h3>
                   <form onSubmit={this.onSignup}>
-                    <input type="email" placeholder="email" ref="email" />
-                    <input type="password" placeholder="new password (leave blank to keep password as is)" ref="password" />
-                    <input type="password" placeholder="confirm new password (leave blank to keep password as is)" ref="password2" />
-                    <input type="text" placeholder="company name" ref="companyName" />
-                    <input type="tel" placeholder="contact phone number" ref="phone" />
-                    <input type="text" placeholder="company website" ref="url" />
-                    <input type="text" placeholder="contact name" ref="contactName" />
-                    <input type="text" placeholder="address Line 1" ref="addressLine1" />
-                    <input type="text" placeholder="address Line 2" ref="addressLine2" />
-                    <input type="text" placeholder="city" ref="city" />
-                    <input type="text" placeholder="state / province / region" ref="state" />
-                    <input type="text" placeholder="zip or postal code" ref="zip" />
+                    <div className="row">
+                      <div className="large-12 columns">
+                        <h3>Edit profile</h3>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="large-12 columns">
+                        <label htmlFor="email">Email</label>
+                        <input id="email" type="email" placeholder={auth.email ? auth.email : 'email'} ref="email" />
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="large-12 columns">
+                        <label htmlFor="password">Password</label>
+                        <input type="password" placeholder="new password (leave blank to keep password as is)" ref="password" />
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="large-12 columns">
+                        <lable htmlFor="password2">Confirm password</lable>
+                        <input id="password2" type="password" placeholder="confirm new password (leave blank to keep password as is)" ref="password2" />
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="large-12 columns">
+                        <h3>Company Information</h3>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="large-6 columns">
+                        <label htmlFor="companyName">Company name</label>
+                        <input id="companyName" type="text" placeholder={auth.companyName ? auth.companyName : 'company name'} ref="companyName" />
+                      </div>
+                      <div className="large-6 columns">
+                        <label htmlFor="phone">Phone</label>
+                        <input id="phone" type="tel" placeholder={auth.phone ? auth.phone : 'phone'} ref="phone" />
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="large-6 columns">
+                        <label htmlFor="url">Website</label>
+                        <input id="url" type="text" placeholder={auth.url ? auth.url : 'website'} ref="url" />
+                      </div>
+                      <div className="large-6 columns">
+                        <label htmlFor="contactName">Contact name</label>
+                        <input type="text" placeholder={auth.contactName ? auth.contactName : 'contact name'} ref="contactName" />
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="large-12 columns">
+                        <h3>Address</h3>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="large-6 columns">
+                        <label htmlFor="addressLine1">Address line 1</label>
+                        <input id="addressLine1" type="text" placeholder={auth.address.addressLine1 ? auth.address.addressLine1 : 'address line 1'} ref="addressLine1" />
+                      </div>
+                      <div className="large-6 columns">
+                        <label htmlFor="addressLine2">Address line 2</label>
+                        <input id="addressLine2" type="text" placeholder={auth.address.addressLine2 ? auth.address.addressLine2 : 'address line 2'} ref="addressLine2" />
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="large-4 columns">
+                        <label htmlFor="city">City</label>
+                        <input id="city" type="text" placeholder={auth.address.city ? auth.address.city : 'city'} ref="city" />
+                      </div>
+                      <div className="large-4 columns">
+                        <label htmlFor="state">State</label>
+                        <input id="state" type="text" placeholder={auth.address.state ? auth.address.state : 'state'} ref="state" />
+                      </div>
+                      <div className="large-4 columns">
+                        <label htmlFor="zip">Zip</label>
+                        <input id="zip" type="text" placeholder={auth.address.zip ? auth.address.zip : 'zip'} ref="zip" />
+                      </div>
+                    </div>
+
+
+
                     {/* <select ref="country">
                       <option value="United States" ref="country">United States</option>
                       <option value="Canada" ref="country">Canada</option>
@@ -153,4 +221,10 @@ class Profile extends React.Component {
   }
 }
 
-export default Redux.connect()(Profile);
+export default Redux.connect(
+  (state) => {
+    return {
+      auth: state.auth
+    }
+  }
+)(Profile);

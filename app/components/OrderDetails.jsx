@@ -46,7 +46,7 @@ class OrderDetails extends React.Component {
           <div className="callout">
             <ul className="inlineList">
               <li><span style={{fontWeight: 'bold'}}>Order status: </span>{orderDetails.status}</li>
-              <li><span style={{fontWeight: 'bold'}}>Order date: </span>{moment(orderDetails.createdAt).format("MMM Do YYYY, h:mm a")}</li>
+              <li><span style={{fontWeight: 'bold'}}>Order date: </span>{moment(Number(orderDetails.createdAt)).format("MMMM Do YYYY, h:mm a")}</li>
             </ul>
             <h5>Order parts:</h5>
             <table>

@@ -31,7 +31,7 @@ class RenderOrder extends React.Component {
   render () {
     var {order, orderNum} = this.props;
     if (order.createdAt) {
-      var date = moment(order.createdAt).format("MMM Do YYYY, h:mm a");
+      var date = moment(Number(order.createdAt)).format("MM/DD/YY");
     } else {
       var date = 'none';
     }

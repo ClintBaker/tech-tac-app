@@ -3,12 +3,11 @@ import {hashHistory} from 'react-router';
 
 const baseURL = 'https://powerful-badlands-45228.herokuapp.com';
 
-export var signup = (id, token, isAdmin) => {
+export var signup = (token, userData) => {
   return {
     type: 'SIGNUP',
-    id,
-    token,
-    isAdmin
+    userData,
+    token
   }
 };
 
@@ -22,7 +21,8 @@ export var startSignup = (user) => {
       var id = res.data._id;
       var token = res.headers['x-auth'];
       var isAdmin = false;
-      dispatch(signup(id, token, isAdmin));
+      var userData = res.data
+      dispatch(signup(token, userData));
       hashHistory.push('/main');
     })
     .catch((e) => {
@@ -41,7 +41,8 @@ export var startLogin = (email, password) => {
       var id = res.data._id;
       var isAdmin = res.data.isAdmin;
       var token = res.headers['x-auth'];
-      dispatch(signup(id, token, isAdmin));
+      var userData = res.data;
+      dispatch(signup(token, userData));
       hashHistory.push('/main');
     }).catch((e) => {
       alert('unable to login');
@@ -205,7 +206,7 @@ export var startUpdateUser = (userData) => {
         'x-auth': auth.token
       }
     }).then((res) => {
-      dispatch(updateAuth(res.data.user));
+      dispatch(signup(auth.token, res.data.user));
       alert('Information updated successfully');
       hashHistory.push('/main');
     }).catch((e) => {
