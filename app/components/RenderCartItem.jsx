@@ -17,12 +17,12 @@ class RenderCartItem extends React.Component {
   render () {
     var part = this.props.part;
     return (
-      <div key={part._id} className="columns small-12 medium-6 large-4 callout">
-        <p>{part._id}</p>
-        <p>{part.partId}</p>
-        <p>Cart: {part.quantity}</p>
-        <button className="button small alert" onClick={this.removeFromCart}>Remove from cart</button>
-      </div>
+      <tr key={part._id}>
+        <td>{part._partId}</td>
+        <td>{part.quantity}</td>
+        <td>$1500</td>
+        <td><button className="button small alert" onClick={this.removeFromCart}>Remove from cart</button></td>
+      </tr>
     );
   }
 }

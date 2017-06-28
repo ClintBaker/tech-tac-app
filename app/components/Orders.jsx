@@ -18,11 +18,12 @@ class Orders extends React.Component {
     dispatch(actions.startPopulateOrders());
   }
   renderOrders() {
-    var orderNum = 0;
+    var orderNum = 1;
     var {orders} = this.props;
-
+    orders.reverse();
+    
     return orders.map((order) => (
-      <RenderOrder orderNum={orderNum++} order={order} key={orderNum++} />
+      <RenderOrder orderNum={orderNum++} order={order} key={orderNum} />
     ))
 
 
@@ -42,11 +43,12 @@ class Orders extends React.Component {
           <table>
             <thead>
               <tr>
-                <th width="50"></th>
-                <th width="200">Order Number</th>
-                <th>Parts</th>
-                <th width="150">Status</th>
-                <th width="150">Order Date</th>
+                <th></th>
+                <th>Order Number</th>
+                <th>Vendor</th>
+                <th>Status</th>
+                <th>Order Date</th>
+                <th>Order Details</th>
               </tr>
             </thead>
             {this.renderOrders()}

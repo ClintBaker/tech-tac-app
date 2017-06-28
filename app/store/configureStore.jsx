@@ -1,14 +1,15 @@
 import * as redux from 'redux';
 import thunk from 'redux-thunk';
 
-import {authReducer, partsReducer, cartReducer, ordersReducer} from 'reducers';
+import {authReducer, partsReducer, cartReducer, ordersReducer, orderDetailsReducer} from 'reducers';
 
 export var configure = (initialState = {}) => {
   var reducer = redux.combineReducers({
     auth: authReducer,
     parts: partsReducer,
     cart: cartReducer,
-    orders: ordersReducer
+    orders: ordersReducer,
+    orderDetails: orderDetailsReducer
   });
 
 

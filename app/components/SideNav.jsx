@@ -7,12 +7,12 @@ import {Link, IndexLink} from 'react-router';
 class SideNav extends React.Component {
   constructor(props) {
     super(props);
-    this.onClick = this.onClick.bind(this);
     this.renderAdmin = this.renderAdmin.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
   onClick(e) {
-    const {dispatch} = this.props;
     e.preventDefault();
+    var {dispatch} = this.props;
 
     dispatch(actions.startLogout());
   }
@@ -31,11 +31,14 @@ class SideNav extends React.Component {
     }
   }
   render () {
+    var {cart} = this.props;
+    var cartNum = cart.length;
     return (
         <div>
             <ul className="menu vertical">
-              <li><a href="#">My Profile</a></li>
-              <li><Link to="/cart" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Cart</Link></li>
+              <li style={{fontWeight: 'bold'}}>Username</li>
+              <li><Link to="/profile" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Company Profile</Link></li>
+              <li><Link to="/cart" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Cart {cartNum > 0 ? <span className="badge success">{cartNum}</span> : ''}</Link></li>
               <li><Link to="/orders" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Manage Orders</Link></li>
               <li><a onClick={this.onClick}>Logout</a></li>
             </ul>
@@ -48,7 +51,8 @@ class SideNav extends React.Component {
 export default connect(
   (state) => {
     return {
-      auth: state.auth
+      auth: state.auth,
+      cart: state.cart
     }
   }
 )(SideNav);

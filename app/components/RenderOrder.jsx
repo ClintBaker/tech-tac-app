@@ -3,7 +3,8 @@ import * as Redux from 'react-redux';
 import * as actions from 'app/actions/actions';
 import {connect} from 'react-redux';
 import Products from 'Products';
-import * as Moment from 'moment';
+import moment from 'moment';
+import {Link} from 'react-router';
 
 import Nav from 'Nav';
 import SideNav from 'SideNav';
@@ -11,19 +12,40 @@ import SideNav from 'SideNav';
 class RenderOrder extends React.Component {
   constructor(props) {
     super(props);
+    this.renderParts = this.renderParts.bind(this);
+    this.onClick = this.onClick.bind(this);
+  }
+  renderParts() {
+    var {order} = this.props;
+    return order.parts.map((part) => (
+      <ul key={part._id} className="inlineList">
+        <li><span style={{fontWeight: 'bold'}}>Part</span>: {part._id}</li>
+        <li><span style={{fontWeight: 'bold'}}>Quantity</span> {part.quantity}</li>
+      </ul>
+    ))
+  }
+  onClick() {
+    var {order, dispatch} = this.props;
+    dispatch(actions.setOrderDetails(order));
   }
   render () {
     var {order, orderNum} = this.props;
-    var timestamp = order._id.toString().substring(0,8);
-    var date = Moment.unix(timestamp).format("MMM Do YYYY, h:mm a");
+    if (order.createdAt) {
+      var date = moment(order.createdAt).format("MMM Do YYYY, h:mm a");
+    } else {
+      var date = 'none';
+    }
     return (
       <tbody>
         <tr>
-          <td>{order.Num}</td>
+          <td>{orderNum}</td>
           <td>{order._id}</td>
-          <td>This is will be all parts and quantities b.</td>
+          <td>Tech Tac</td>
           <td>{order.status}</td>
           <td>{date}</td>
+          <td>
+            <Link className="button small" to="/orders/details" onClick={this.onClick}>Details</Link>
+          </td>
         </tr>
       </tbody>
     );

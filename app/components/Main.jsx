@@ -20,8 +20,7 @@ class Main extends React.Component {
         </div>
         <div className="small-offset-3 small-8 medium-offset-3 medium-6 large-offset-3 large-7 center main">
           <div className="callout">
-            <h2 className="title-text">Tech Tac Online Portal</h2>
-            <p>Place and manage orders with Tech Tac online</p>
+            <h2 className="title-text">Products</h2>
           </div>
           <div className="row">
             <div>

@@ -16,7 +16,6 @@ class Cart extends React.Component {
   submitOrder(e) {
     e.preventDefault();
     var {dispatch, cart} = this.props;
-
     dispatch(actions.startNewOrder(cart));
   }
   render () {

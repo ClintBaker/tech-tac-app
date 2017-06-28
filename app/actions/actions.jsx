@@ -1,6 +1,5 @@
 import axios from 'axios';
 import {hashHistory} from 'react-router';
-import _ from 'lodash';
 
 const baseURL = 'https://powerful-badlands-45228.herokuapp.com';
 
@@ -152,7 +151,8 @@ export var startNewOrder = (cart) => {
     }).then((res) => {
       alert('Successfully placed order');
       dispatch(clearCart());
-      hashHistory.push('/orders');
+      dispatch(setOrderDetails(res.data));
+      hashHistory.push('/orders/details');
     }).catch((e) => {
       alert('Unable to place order');
     });
@@ -180,4 +180,11 @@ export var startPopulateOrders = () => {
       console.log(e);
     });
   };
+};
+
+export var setOrderDetails = (order) => {
+    return {
+      type: 'SET_ORDER_DETAILS',
+      order
+    }
 };

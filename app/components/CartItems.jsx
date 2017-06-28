@@ -22,9 +22,19 @@ class CartItems extends React.Component {
   }
   render () {
     return (
-      <div>
-        {this.renderCartItems()}
-      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Part ID</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+            <th>Remove from cart</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.renderCartItems()}
+        </tbody>
+      </table>
     );
   }
 }

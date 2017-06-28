@@ -46,7 +46,16 @@ export var cartReducer = (state = [], action) => {
 export var ordersReducer = (state = [], action) => {
   switch(action.type) {
     case 'POPULATE_ORDERS':
-      return action.orders
+      return action.orders;
+    default:
+      return state;
+  }
+};
+
+export var orderDetailsReducer = (state = {}, action) => {
+  switch(action.type) {
+    case 'SET_ORDER_DETAILS':
+      return action.order;
     default:
       return state;
   }

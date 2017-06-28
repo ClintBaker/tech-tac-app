@@ -21,15 +21,14 @@ class Nav extends React.Component {
           <ul className="menu">
             <li className="menu-text title-text">Tech Tac Interactive</li>
             <li><Link to="/main" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Products</Link></li>
-            <li><Link to="/" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Advantages of Slimline</Link></li>
-            <li><Link to="/" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>FAQ</Link></li>
-            <li><Link to="/" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Contact</Link></li>
+            <li><Link to="/main" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>FAQ</Link></li>
+            <li><Link to="/main" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Contact</Link></li>
           </ul>
         </div>
         <div className="top-bar-right">
           <form onSubmit={this.onSearch}>
-            <ul className="menu">
-              <li><input type="search" placeholder="Search by product name" ref="search" /></li>
+            <ul className="menu top-bar-left">
+              <li><input type="search" placeholder="Search products" ref="search" /></li>
               <li><input type="submit" className="button" value="Search" /></li>
             </ul>
           </form>
