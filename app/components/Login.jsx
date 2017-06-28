@@ -27,9 +27,10 @@ class Login extends React.Component {
           <button className="button expanded radius" style={{backgroundColor: "#00457c"}}>Log in</button>
         </form>
         <p>Need an account?</p>
-        <button className="button expanded hollow radius" style={{border: 'none', backgroundColor: '#eaeaea'}}>
-          <Link to="/signup" activeClassName="active" activeStyle={{fontWeight: 'bold'}} style={{color: "#000", fontWeight: 'bold'}}>Signup</Link>
-        </button>
+          <Link to="/signup" className="button expanded hollow radius" style={{backgroundColor: '#eaeaea', color: '#000', border: 'none', fontWeight: 'bold'}} activeClassName="active"
+          activeStyle={{fontWeight: 'bold'}}>
+            Signup
+        </Link>
 
       </div>
     );

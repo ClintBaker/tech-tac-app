@@ -12,7 +12,6 @@ class Profile extends React.Component {
 
   }
   onSignup (e) {
-    console.log('onSignup');
     e.preventDefault();
     var {dispatch} = this.props;
     var password = this.refs.password.value;
