@@ -12,6 +12,7 @@ class Profile extends React.Component {
 
   }
   onSignup (e) {
+    console.log('onSignup');
     e.preventDefault();
     var {dispatch} = this.props;
     var password = this.refs.password.value;
@@ -28,10 +29,6 @@ class Profile extends React.Component {
     var zip = this.refs.zip.value;
     var country = "USA";
 
-    if (!password === password2) {
-      return alert('Passwords must match');
-    }
-
     var newUser = {
       password,
       email,
@@ -39,15 +36,76 @@ class Profile extends React.Component {
       phone,
       url,
       contactName,
-      addressLine1,
-      addressLine2,
-      city,
-      state,
-      zip,
-      country
+      address: {
+        addressLine1,
+        addressLine2,
+        city,
+        state,
+        zip,
+        country
+      }
     };
 
-    alert('still working on this feature');
+    var user = {
+      address: {
+
+      }
+    };
+    if (password.length > 0) {
+      user.password = password;
+    }
+
+    if (email.length > 0) {
+      user.email = email;
+    }
+
+    if (companyName.length > 0) {
+      user.companyName = companyName;
+    }
+
+    if (phone.length > 0) {
+      user.phone = phone;
+    }
+
+    if (url.length > 0) {
+      user.url = url;
+    }
+
+    if (contactName.length > 0) {
+      user.contactName = contactName;
+    }
+
+    if (addressLine1.length > 0) {
+      user.address.addressLine1 = addressLine1;
+    }
+
+    if (addressLine2.length > 0) {
+      user.address.addressLine2 = addressLine2;
+    }
+
+    if (city.length > 0) {
+      user.address.city = city;
+    }
+
+    if (state.length > 0) {
+      user.address.state = state;
+    }
+
+    if (zip.length > 0) {
+      user.address.zip = zip;
+    }
+
+    if (country.length > 0) {
+      user.address.country = country;
+    }
+
+    if (user.password) {
+      if (password !== password2) {
+        return alert('Passwords must match');
+      }
+    }
+
+    dispatch(actions.startUpdateUser(newUser));
   }
   render () {
     return (

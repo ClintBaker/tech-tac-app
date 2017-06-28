@@ -39,7 +39,6 @@ class Signup extends React.Component {
       zip,
       country
     };
-    console.log(newUser);
 
     dispatch(actions.startSignup(newUser));
   }

@@ -188,3 +188,28 @@ export var setOrderDetails = (order) => {
       order
     }
 };
+
+export var updateAuth = (user) => {
+  return {
+    type: 'UPDATE',
+    user
+  }
+}
+
+export var startUpdateUser = (userData) => {
+  return (dispatch, getState) => {
+    var {auth} = getState();
+
+    return axios.patch(`${baseURL}/users/${auth.id}`, userData, {
+      headers: {
+        'x-auth': auth.token
+      }
+    }).then((res) => {
+      dispatch(updateAuth(res.data.user));
+      alert('Information updated successfully');
+      hashHistory.push('/main');
+    }).catch((e) => {
+      alert(e);
+    });
+  }
+};
