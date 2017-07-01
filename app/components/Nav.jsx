@@ -16,20 +16,21 @@ class Nav extends React.Component {
   }
   render () {
     return (
-      <div className="top-bar">
-        <div className="top-bar-left">
-          <ul className="menu">
-            <li className="menu-text title-text">Tech Tac Interactive</li>
-            <li><Link to="/main" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Products</Link></li>
-            <li><Link to="/main" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>FAQ</Link></li>
-            <li><Link to="/main" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Contact</Link></li>
+      <div className="top-bar blueMainBg">
+        <div className="top-bar-left blueMainBg">
+          <ul className="menu blueMainBg" style={{color: '#fff'}}>
+            <li className="menu-text title-text blueMainBg">Tech Tac Interactive</li>
+            <li className="blueMainBg"><Link className="blueMainBg2" to="/main" activeClassName="active" activeStyle={{fontWeight: 'bold', color: 'white'}}><span style={{color: 'white'}}>Products</span></Link></li>
+            <li className="blueMainBg"><Link className="blueMainBg2" to="/main" activeClassName="active" activeStyle={{fontWeight: 'bold'}}><span style={{color: 'white'}}>FAQ</span></Link></li>
+            <li className="blueMainBg"><Link className="blueMainBg2" to="/main" activeClassName="active" activeStyle={{fontWeight: 'bold'}}><span style={{color: 'white'}}>Contact</span></Link></li>
           </ul>
         </div>
-        <div className="top-bar-right">
+        <div className="top-bar-right blueMainBg">
           <form onSubmit={this.onSearch}>
             <ul className="menu top-bar-left">
-              <li><input type="search" placeholder="Search products" ref="search" /></li>
-              <li><input type="submit" className="button" value="Search" /></li>
+              <li className="blueMainBg"><input className="small radius" type="search" placeholder="Search products" ref="search" /></li>
+              {/* <li className="blueMainBg"><input type="submit" className="button" value="Search" style={{backgroundColor: '#fff'}} /></li> */}
+              <li className="blueMainBg"><button className="button small radius" value="Submit" style={{backgroundColor: '#fff', color: '#00457c', fontWeight: 'bold'}}>Search</button></li>
             </ul>
           </form>
         </div>

@@ -25,7 +25,7 @@ class Cart extends React.Component {
         <div className="callout sticky columns small-2 medium-2 large-2 side-nav">
           <SideNav />
         </div>
-        <div className="small-offset-3 small-8 medium-offset-3 medium-6 large-offset-3 large-7 center main">
+        <div className="small-offset-3 small-8 medium-offset-3 medium-6 large-offset-3 large-7 main">
           <div className="callout">
             <h2 className="title-text">Cart</h2>
             <p>Manage your cart before generating an order</p>

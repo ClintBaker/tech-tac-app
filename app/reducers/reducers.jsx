@@ -36,7 +36,12 @@ export var cartReducer = (state = [], action) => {
         ...state,
         {
           quantity: action.quantity,
-          _partId: action.partId,
+          _partId: action.part._id,
+          _creator: action.part._creator,
+          price: action.part.price,
+          number: action.part.number,
+          name: action.part.name,
+          image: action.part.image,
           _id: action._id
         }
       ];

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {hashHistory} from 'react-router';
+import request from 'superagent';
 
 const baseURL = 'https://powerful-badlands-45228.herokuapp.com';
 
@@ -73,12 +74,12 @@ export var startLogout = () => {
   }
 };
 
-export var addToCart = (quantity, partId) => {
+export var addToCart = (quantity, part) => {
   return {
     type: 'ADD_TO_CART',
     quantity,
-    partId,
-    _id: (partId + (new Date()).getTime())
+    part,
+    _id: (part._id + (new Date()).getTime())
   }
 };
 
@@ -98,7 +99,7 @@ export var startGetProducts = () => {
       var parts = res.data.parts;
       dispatch(getParts(parts));
     }).catch((e) => {
-      alert(e);
+      console.log(e);
     });
   }
 };
@@ -136,12 +137,18 @@ export var startNewOrder = (cart) => {
     var newCart = [];
 
     cart.map((obj) => {
-      newCart.push({_partId: obj._partId, quantity: obj.quantity})
+      newCart.push({_partId: obj._partId, quantity: obj.quantity, _creator: obj._creator, price: obj.price, number: obj.number, name: obj.name, image: obj.image, subtotal: (obj.quantity * obj.price)})
+    });
+
+    var total = 0;
+    cart.map((obj) => {
+      total += obj.subtotal;
     });
 
     var data = {
       parts: newCart,
-      _companyId: auth.id
+      _companyId: auth.id,
+      total
     };
     var newData = JSON.stringify(data);
 
@@ -210,7 +217,56 @@ export var startUpdateUser = (userData) => {
       alert('Information updated successfully');
       hashHistory.push('/main');
     }).catch((e) => {
-      alert(e);
+      console.log(e);
+    });
+  }
+};
+
+export var startCreateProduct = (product) => {
+  return (dispatch, getState) => {
+    const CLOUDINARY_UPLOAD_PRESET = 'b4ydmdnn';
+    const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dmkyqvixg/image/upload';
+
+    let upload = request.post(CLOUDINARY_UPLOAD_URL).field('upload_preset', CLOUDINARY_UPLOAD_PRESET).field('file', product.image);
+
+    upload.end((err, response) => {
+      if (err) {
+        console.log(err);
+      }
+
+      if (response.body.secure_url !== '') {
+        var {auth} = getState();
+        product.image = response.body.secure_url;
+        axios.post(`${baseURL}/parts`, product, {
+          headers: {
+            'x-auth': auth.token
+          }
+        }).then((res) => {
+          alert('Product created');
+          hashHistory.push('/admin/products');
+        }).catch((e) => {
+          console.log(e);
+        });
+      } else {
+        alert('unable to upload image');
+      }
+    });
+  }
+};
+
+export var startDeletePart = (id) => {
+  return (dispatch, getState) => {
+    var {auth} = getState();
+    axios.delete(`${baseURL}/parts/${id}`, {
+      headers: {
+        'x-auth': auth.token
+      }
+    }).then((res) => {
+      dispatch(startGetProducts());
+      alert('Part deleted');
+      hashHistory.push('/admin/products');
+    }).catch((e) => {
+      alert('Unable to delete product');
     });
   }
 };

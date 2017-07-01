@@ -109,112 +109,119 @@ class Profile extends React.Component {
   render () {
     var {auth} = this.props;
     return (
-
       <div>
+        {/* <div className="bg-color"></div> */}
         <Nav />
-        <div className="callout sticky columns small-2 medium-2 large-2 side-nav">
+        <div className="columns small-2 medium-2 large-2 side-nav sticky callout">
           <SideNav />
         </div>
-        <div className="small-offset-3 small-8 medium-offset-3 medium-6 large-offset-3 large-7 center main">
-          <div className="callout">
-            <h2 className="title-text">{auth.companyName ? auth.companyName : 'Company Profile'}</h2>
-            <p>Manage your profile</p>
-          </div>
+        <div className="small-centered small-offset-2 medium-offset-3 large-offset-4 small-7 medium-6 large-4 center signup">
+
           <div>
-              <div className="callout">
-                  <form onSubmit={this.onSignup}>
-                    <div className="row">
-                      <div className="large-12 columns">
-                        <h3>Edit profile</h3>
+            <div className="radiusDouble">
+              <h2 className="title-text centered">{auth.companyName ? auth.companyName : 'Company Profile'}</h2>
+              <div className="small-centered center large-6">
+                <p className="blueMain">Manage your company profile </p>
+
+              </div>
+            </div>
+            <div>
+                <div className="callout radiusDouble">
+                    <form onSubmit={this.onSignup}>
+                      <div className="row margin">
+                        <div className="large-12 columns">
+                          <h3>Profile</h3>
+                        </div>
                       </div>
-                    </div>
-                    <div className="row">
-                      <div className="large-12 columns">
-                        <label htmlFor="email">Email</label>
-                        <input id="email" type="email" placeholder={auth.email ? auth.email : 'email'} ref="email" />
+                      <div className="row">
+                        <div className="large-12 columns">
+                          <label htmlFor="email">Email</label>
+                          <input id="email" type="email" placeholder={auth.email ? auth.email : 'email'} ref="email" />
+                        </div>
                       </div>
-                    </div>
-                    <div className="row">
-                      <div className="large-12 columns">
-                        <label htmlFor="password">Password</label>
-                        <input type="password" placeholder="new password (leave blank to keep password as is)" ref="password" />
+                      <div className="row">
+                        <div className="large-12 columns">
+                          <label htmlFor="password">Password</label>
+                          <input type="password" placeholder="password (leave blank to keep password as is)" ref="password" />
+                        </div>
                       </div>
-                    </div>
-                    <div className="row">
-                      <div className="large-12 columns">
-                        <lable htmlFor="password2">Confirm password</lable>
-                        <input id="password2" type="password" placeholder="confirm new password (leave blank to keep password as is)" ref="password2" />
+                      <div className="row">
+                        <div className="large-12 columns">
+                          <lable htmlFor="password2">Confirm password</lable>
+                          <input id="password2" type="password" placeholder="confirm password (leave blank to keep password as is)" ref="password2" />
+                        </div>
                       </div>
-                    </div>
-                    <div className="row">
-                      <div className="large-12 columns">
-                        <h3>Company Information</h3>
+                      <div className="row margin">
+                        <div className="large-12 columns">
+                          <h3>Company Information</h3>
+                        </div>
                       </div>
-                    </div>
-                    <div className="row">
-                      <div className="large-6 columns">
-                        <label htmlFor="companyName">Company name</label>
-                        <input id="companyName" type="text" placeholder={auth.companyName ? auth.companyName : 'company name'} ref="companyName" />
+                      <div className="row">
+                        <div className="large-6 columns">
+                          <label htmlFor="companyName">Company name</label>
+                          <input id="companyName" type="text" placeholder={auth.companyName ? auth.companyName : 'company name'} ref="companyName" />
+                        </div>
+                        <div className="large-6 columns">
+                          <label htmlFor="phone">Phone</label>
+                          <input id="phone" type="tel" placeholder={auth.phone ? auth.phone : 'phone number'} ref="phone" />
+                        </div>
                       </div>
-                      <div className="large-6 columns">
-                        <label htmlFor="phone">Phone</label>
-                        <input id="phone" type="tel" placeholder={auth.phone ? auth.phone : 'phone'} ref="phone" />
+                      <div className="row">
+                        <div className="large-6 columns">
+                          <label htmlFor="url">Website</label>
+                          <input id="url" type="text" placeholder={auth.url ? auth.url : 'website'} ref="url" />
+                        </div>
+                        <div className="large-6 columns">
+                          <label htmlFor="contactName">Contact name</label>
+                          <input type="text" placeholder={auth.contactName ? auth.contactName : 'contact name'} ref="contactName" />
+                        </div>
                       </div>
-                    </div>
-                    <div className="row">
-                      <div className="large-6 columns">
-                        <label htmlFor="url">Website</label>
-                        <input id="url" type="text" placeholder={auth.url ? auth.url : 'website'} ref="url" />
+                      <div className="row margin">
+                        <div className="large-12 columns">
+                          <h3>Address</h3>
+                        </div>
                       </div>
-                      <div className="large-6 columns">
-                        <label htmlFor="contactName">Contact name</label>
-                        <input type="text" placeholder={auth.contactName ? auth.contactName : 'contact name'} ref="contactName" />
+                      <div className="row">
+                        <div className="large-6 columns">
+                          <label htmlFor="addressLine1">Address line 1</label>
+                          <input id="addressLine1" type="text" placeholder={auth.address.addressLine1 ? auth.address.addressLine1 : 'address line 1'} ref="addressLine1" />
+                        </div>
+                        <div className="large-6 columns">
+                          <label htmlFor="addressLine2">Address line 2</label>
+                          <input id="addressLine2" type="text" placeholder={auth.address.addressLine2 ? auth.address.addressLine2 : 'address line 2'} ref="addressLine2" />
+                        </div>
                       </div>
-                    </div>
-                    <div className="row">
-                      <div className="large-12 columns">
-                        <h3>Address</h3>
+                      <div className="row">
+                        <div className="large-4 columns">
+                          <label htmlFor="city">City</label>
+                          <input id="city" type="text" placeholder={auth.address.city ? auth.address.city : 'city'} ref="city" />
+                        </div>
+                        <div className="large-4 columns">
+                          <label htmlFor="state">State</label>
+                          <input id="state" type="text" placeholder={auth.address.state ? auth.address.state : 'state'} ref="state" />
+                        </div>
+                        <div className="large-4 columns">
+                          <label htmlFor="zip">Zip</label>
+                          <input id="zip" type="text" placeholder={auth.address.zip ? auth.address.zip : 'zip'} ref="zip" />
+                        </div>
                       </div>
-                    </div>
-                    <div className="row">
-                      <div className="large-6 columns">
-                        <label htmlFor="addressLine1">Address line 1</label>
-                        <input id="addressLine1" type="text" placeholder={auth.address.addressLine1 ? auth.address.addressLine1 : 'address line 1'} ref="addressLine1" />
-                      </div>
-                      <div className="large-6 columns">
-                        <label htmlFor="addressLine2">Address line 2</label>
-                        <input id="addressLine2" type="text" placeholder={auth.address.addressLine2 ? auth.address.addressLine2 : 'address line 2'} ref="addressLine2" />
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="large-4 columns">
-                        <label htmlFor="city">City</label>
-                        <input id="city" type="text" placeholder={auth.address.city ? auth.address.city : 'city'} ref="city" />
-                      </div>
-                      <div className="large-4 columns">
-                        <label htmlFor="state">State</label>
-                        <input id="state" type="text" placeholder={auth.address.state ? auth.address.state : 'state'} ref="state" />
-                      </div>
-                      <div className="large-4 columns">
-                        <label htmlFor="zip">Zip</label>
-                        <input id="zip" type="text" placeholder={auth.address.zip ? auth.address.zip : 'zip'} ref="zip" />
-                      </div>
-                    </div>
 
 
 
-                    {/* <select ref="country">
-                      <option value="United States" ref="country">United States</option>
-                      <option value="Canada" ref="country">Canada</option>
-                      <option value="Mexico" ref="country">Mexico</option>
-                    </select> */}
-                    {/* <input type="url" placeholder="country" ref="companyName" /> */}
-                    <button className="button">Submit</button>
-                  </form>
-                </div>
+                      {/* <select ref="country">
+                        <option value="United States" ref="country">United States</option>
+                        <option value="Canada" ref="country">Canada</option>
+                        <option value="Mexico" ref="country">Mexico</option>
+                      </select> */}
+                      {/* <input type="url" placeholder="country" ref="companyName" /> */}
+                      <button className="margin button expanded radiusDouble" style={{backgroundColor: '#00457c'}}>Update</button>
+                    </form>
+                  </div>
+            </div>
           </div>
         </div>
       </div>
+
 
     );
   }
