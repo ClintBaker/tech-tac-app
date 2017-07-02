@@ -12,17 +12,7 @@ import SideNav from 'SideNav';
 class RenderOrder extends React.Component {
   constructor(props) {
     super(props);
-    this.renderParts = this.renderParts.bind(this);
     this.onClick = this.onClick.bind(this);
-  }
-  renderParts() {
-    var {order} = this.props;
-    return order.parts.map((part) => (
-      <ul key={part._id} className="inlineList">
-        <li><span style={{fontWeight: 'bold'}}>Part</span>: {part._id}</li>
-        <li><span style={{fontWeight: 'bold'}}>Quantity</span> {part.quantity}</li>
-      </ul>
-    ))
   }
   onClick() {
     var {order, dispatch} = this.props;
@@ -43,6 +33,7 @@ class RenderOrder extends React.Component {
           <td>Tech Tac</td>
           <td>{order.status}</td>
           <td>{date}</td>
+          <td>{order.total ? '$' + order.total.toLocaleString() : ''}</td>
           <td>
             <Link className="button small" to="/orders/details" onClick={this.onClick}>Details</Link>
           </td>

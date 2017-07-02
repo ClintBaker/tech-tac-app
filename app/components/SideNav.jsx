@@ -37,7 +37,7 @@ class SideNav extends React.Component {
     var {cart, auth} = this.props;
     var cartNum = cart.length;
     return (
-        <div>
+        <div id="sidebar" className="pad">
           {this.renderAdmin()}
             <ul className="menu vertical">
               <li style={{fontWeight: 'bold'}}>{auth.companyName ? auth.companyName : auth.email}</li>

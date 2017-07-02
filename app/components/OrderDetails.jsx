@@ -21,9 +21,11 @@ class OrderDetails extends React.Component {
     return parts.map((part) => (
 
         <tr key={part._id}>
+          <td>{part.name}</td>
           <td>{part._partId}</td>
+          <td>${part.price}</td>
           <td>{part.quantity}</td>
-          <td>$1500</td>
+          <td>${part.subtotal ? part.subtotal.toLocaleString() : '0'}</td>
         </tr>
 
     ))
@@ -52,7 +54,9 @@ class OrderDetails extends React.Component {
             <table>
               <thead>
                 <tr>
-                  <th>Part ID</th>
+                  <th>Part</th>
+                  <th>ID</th>
+                  <th>Price</th>
                   <th>Quantity</th>
                   <th>Subtotal</th>
                 </tr>
@@ -61,7 +65,7 @@ class OrderDetails extends React.Component {
                 {this.renderOrderParts()}
               </tbody>
             </table>
-            <h5 style={{fontWeight: 'bold'}}>Total: $2500</h5>
+            <h5 style={{fontWeight: 'bold'}}>Total: {orderDetails.total ? "$" + orderDetails.total.toLocaleString() : 'none'}</h5>
           </div>
         </div>
       </div>

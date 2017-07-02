@@ -32,10 +32,10 @@ class Orders extends React.Component {
     return (
       <div>
         <Nav />
-        <div className="callout sticky columns small-2 medium-2 large-2 side-nav">
+        {/* <div className="callout sticky columns small-2 medium-2 large-2 side-nav">
           <SideNav />
-        </div>
-        <div className="small-offset-3 small-8 medium-offset-3 medium-6 large-offset-3 large-7 main">
+        </div> */}
+        <div className="small-offset-3 small-8 medium-offset-3 medium-6 large-offset-3 large-6 main">
           <div className="callout">
             <h2 className="title-text">Orders</h2>
             <p>Manage your orders</p>
@@ -48,6 +48,7 @@ class Orders extends React.Component {
                 <th>Vendor</th>
                 <th>Status</th>
                 <th>Order Date</th>
+                <th>Total</th>
                 <th>Order Details</th>
               </tr>
             </thead>

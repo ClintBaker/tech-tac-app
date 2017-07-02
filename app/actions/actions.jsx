@@ -141,8 +141,8 @@ export var startNewOrder = (cart) => {
     });
 
     var total = 0;
-    cart.map((obj) => {
-      total += obj.subtotal;
+    cart.forEach((obj) => {
+      total += (obj.quantity * obj.price);
     });
 
     var data = {
