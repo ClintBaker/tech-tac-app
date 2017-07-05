@@ -29,6 +29,15 @@ export var partsReducer = (state = [], action) => {
   }
 };
 
+export var partDetailsReducer = (state = {}, action) => {
+  switch(action.type) {
+    case 'PART_DETAILS':
+      return action.part;
+    default:
+      return state;
+  }
+};
+
 export var cartReducer = (state = [], action) => {
   switch(action.type) {
     case 'ADD_TO_CART':

@@ -49,10 +49,7 @@ class CreateProducts extends React.Component {
       <div>
         {/* <div className="bg-color"></div> */}
         <Nav />
-        <div className="columns small-2 medium-2 large-2 side-nav sticky callout">
-          <SideNav />
-        </div>
-        <div className="small-centered small-offset-2 medium-offset-3 large-offset-4 small-7 medium-6 large-4 center signup">
+        <div className="small-centered small-offset-2 medium-offset-3 large-offset-3 small-8 medium-6 large-6 center signup padMain">
 
           <div>
             <div className="radiusDouble">

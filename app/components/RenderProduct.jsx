@@ -23,18 +23,21 @@ class RenderProduct extends React.Component {
       <div key={part._id}>
         <div className="products callout row">
           <div className="columns small-5 medium-5 large-5">
-            <div className=" imgContainer">
+            <div className="imgContainer row">
                 <img ref="img" src={part.image} />
             </div>
           </div>
-          <div className="columns small-5 medium-5 large-5">
+          <div className="columns small-5 medium-5 large-5" style={{float: 'left'}}>
             <h4>{part.name}</h4>
-            <p><span style={{fontWeight: 'bold'}}>Part number: </span>{part.number}</p>
-            <p><span style={{fontWeight: 'bold'}}>Price: </span>${part.price}</p>
-            <div className="row">
+            <ul className="menu vertical">
+              <li><span style={{fontWeight: 'bold'}}>Part number: </span>{part.number}</li>
+              <li><span style={{fontWeight: 'bold'}}>Price: </span>${part.price}</li>
+            </ul>
+            <p>{part.description}</p>
+            <div className="row cartForm">
               <form onSubmit={this.formSubmit}>
                 <ul className="menu">
-                  <li><input placeholder="quantity" type="number" ref="quantity" /></li>
+                  <li><input placeholder="quantity" type="number" ref="quantity" style={{width: '100px', marginRight: '5px'}} /></li>
                   <li><button className="button small">Add to cart</button></li>
                 </ul>
               </form>

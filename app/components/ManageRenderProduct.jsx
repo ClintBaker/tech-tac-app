@@ -2,6 +2,7 @@ import React from 'react';
 import * as Redux from 'react-redux';
 import * as actions from 'app/actions/actions';
 import {connect} from 'react-redux';
+import {hashHistory} from 'react-router';
 
 class ManageRenderProduct extends React.Component {
   constructor(props) {
@@ -12,9 +13,8 @@ class ManageRenderProduct extends React.Component {
   onEdit(e) {
     e.preventDefault();
     var {dispatch, part} = this.props;
-    var partId = part._id;
-
-    // dispatch(actions.addToCart(quantity, partNumber));
+    dispatch(actions.setPartDetails(part));
+    hashHistory.push('/edit/part');
   }
   onDelete(e) {
     e.preventDefault();

@@ -1,7 +1,7 @@
 import * as redux from 'redux';
 import thunk from 'redux-thunk';
 
-import {authReducer, partsReducer, cartReducer, ordersReducer, orderDetailsReducer} from 'reducers';
+import {authReducer, partsReducer, cartReducer, ordersReducer, orderDetailsReducer, partDetailsReducer} from 'reducers';
 
 export var configure = (initialState = {}) => {
   var reducer = redux.combineReducers({
@@ -9,7 +9,8 @@ export var configure = (initialState = {}) => {
     parts: partsReducer,
     cart: cartReducer,
     orders: ordersReducer,
-    orderDetails: orderDetailsReducer
+    orderDetails: orderDetailsReducer,
+    partDetails: partDetailsReducer
   });
 
 

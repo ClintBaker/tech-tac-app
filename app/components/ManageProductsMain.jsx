@@ -14,12 +14,8 @@ class ManageProductsMain extends React.Component {
   render () {
     return (
       <div>
-        <div className="bg-color"></div>
         <Nav />
-        <div className="callout sticky columns small-2 medium-2 large-2 side-nav">
-          <SideNav />
-        </div>
-        <div className="small-offset-3 small-8 medium-offset-3 medium-6 large-offset-3 large-7 center main">
+        <div className="small-offset-3 small-8 medium-offset-3 medium-6 large-offset-3 large-6 center main padMain">
           <div className="callout">
             <h2 className="title-text">Manage Products</h2>
           </div>

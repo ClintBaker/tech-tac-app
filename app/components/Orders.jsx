@@ -35,7 +35,7 @@ class Orders extends React.Component {
         {/* <div className="callout sticky columns small-2 medium-2 large-2 side-nav">
           <SideNav />
         </div> */}
-        <div className="small-offset-3 small-8 medium-offset-3 medium-6 large-offset-3 large-6 main">
+        <div className="small-offset-3 small-8 medium-offset-3 medium-6 large-offset-3 large-6 main padMain">
           <div className="callout">
             <h2 className="title-text">Orders</h2>
             <p>Manage your orders</p>

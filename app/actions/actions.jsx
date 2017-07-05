@@ -190,6 +190,22 @@ export var startPopulateOrders = () => {
   };
 };
 
+export var startPopulateOrdersAdmin = () => {
+  return (dispatch, getState) => {
+    var {auth} = getState();
+
+    return axios.get(`${baseURL}/orders/all`, {
+      headers: {
+        'x-auth': auth.token
+      }
+    }).then((res) => {
+      dispatch(populateOrders(res.data.orders));
+    }).catch((e) => {
+      console.log(e);
+    });
+  };
+};
+
 export var setOrderDetails = (order) => {
     return {
       type: 'SET_ORDER_DETAILS',
@@ -202,7 +218,24 @@ export var updateAuth = (user) => {
     type: 'UPDATE',
     user
   }
-}
+};
+
+export var editOrderDetails = (order) => {
+  return (dispatch, getState) => {
+    var {auth} = getState();
+
+    return axios.patch(`${baseURL}/orders/${order._id}`, order, {
+      headers: {
+        'x-auth': auth.token
+      }
+    }).then((res) => {
+      dispatch(startPopulateOrdersAdmin);
+      hashHistory.push('/orders/manage');
+    }).catch((e) => {
+      console.log(e);
+    });
+  }
+};
 
 export var startUpdateUser = (userData) => {
   return (dispatch, getState) => {
@@ -270,3 +303,60 @@ export var startDeletePart = (id) => {
     });
   }
 };
+
+export var setPartDetails = (part) => {
+  return {
+    type: 'PART_DETAILS',
+    part
+  }
+};
+
+export var startEditProduct = (part, id) => {
+  return (dispatch, getState) => {
+
+    if (part.image) {
+      const CLOUDINARY_UPLOAD_PRESET = 'b4ydmdnn';
+      const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dmkyqvixg/image/upload';
+
+      let upload = request.post(CLOUDINARY_UPLOAD_URL).field('upload_preset', CLOUDINARY_UPLOAD_PRESET).field('file', part.image);
+
+      upload.end((err, response) => {
+        if (err) {
+          console.log(err);
+        }
+
+        if (response.body.secure_url !== '') {
+          var {auth} = getState();
+          part.image = response.body.secure_url;
+          axios.patch(`${baseURL}/parts/${id}`, part, {
+            headers: {
+              'x-auth': auth.token
+            }
+          }).then((res) => {
+            alert('Part edited');
+            dispatch(startGetProducts());
+            hashHistory.push('/admin/products');
+          }).catch((e) => {
+            console.log(e);
+          });
+        } else {
+          alert('unable to upload image');
+        }
+      });
+    } else {
+      var {auth} = getState();
+      axios.patch(`${baseURL}/parts/${id}`, part, {
+        headers: {
+          'x-auth': auth.token
+        }
+      }).then((res) => {
+        dispatch(startGetProducts());
+        alert('Part edited');
+        hashHistory.push('/admin/products');
+      }).catch((e) => {
+        alert('Unable to edit part');
+      });
+    }
+
+  }
+}

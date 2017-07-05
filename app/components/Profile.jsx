@@ -14,8 +14,6 @@ class Profile extends React.Component {
   onSignup (e) {
     e.preventDefault();
     var {dispatch} = this.props;
-    var password = this.refs.password.value;
-    var password2 = this.refs.password2.value;
     var email = this.refs.email.value;
     var companyName = this.refs.companyName.value;
     var phone = this.refs.phone.value;
@@ -29,7 +27,6 @@ class Profile extends React.Component {
     var country = "USA";
 
     var newUser = {
-      password,
       email,
       companyName,
       phone,
@@ -112,10 +109,7 @@ class Profile extends React.Component {
       <div>
         {/* <div className="bg-color"></div> */}
         <Nav />
-        <div className="columns small-2 medium-2 large-2 side-nav sticky callout">
-          <SideNav />
-        </div>
-        <div className="small-centered small-offset-2 medium-offset-3 large-offset-4 small-7 medium-6 large-4 center signup">
+        <div className="small-centered small-offset-2 medium-offset-3 large-offset-3 small-8 medium-6 large-6 center signup padMain">
 
           <div>
             <div className="radiusDouble">
@@ -139,7 +133,7 @@ class Profile extends React.Component {
                           <input id="email" type="email" placeholder={auth.email ? auth.email : 'email'} ref="email" />
                         </div>
                       </div>
-                      <div className="row">
+                      {/* <div className="row">
                         <div className="large-12 columns">
                           <label htmlFor="password">Password</label>
                           <input type="password" placeholder="password (leave blank to keep password as is)" ref="password" />
@@ -150,7 +144,7 @@ class Profile extends React.Component {
                           <lable htmlFor="password2">Confirm password</lable>
                           <input id="password2" type="password" placeholder="confirm password (leave blank to keep password as is)" ref="password2" />
                         </div>
-                      </div>
+                      </div> */}
                       <div className="row margin">
                         <div className="large-12 columns">
                           <h3>Company Information</h3>
@@ -162,8 +156,8 @@ class Profile extends React.Component {
                           <input id="companyName" type="text" placeholder={auth.companyName ? auth.companyName : 'company name'} ref="companyName" />
                         </div>
                         <div className="large-6 columns">
-                          <label htmlFor="phone">Phone</label>
-                          <input id="phone" type="tel" placeholder={auth.phone ? auth.phone : 'phone number'} ref="phone" />
+                          <label htmlFor="contactName">Contact name</label>
+                          <input type="text" placeholder={auth.contactName ? auth.contactName : 'contact name'} ref="contactName" />
                         </div>
                       </div>
                       <div className="row">
@@ -172,8 +166,8 @@ class Profile extends React.Component {
                           <input id="url" type="text" placeholder={auth.url ? auth.url : 'website'} ref="url" />
                         </div>
                         <div className="large-6 columns">
-                          <label htmlFor="contactName">Contact name</label>
-                          <input type="text" placeholder={auth.contactName ? auth.contactName : 'contact name'} ref="contactName" />
+                          <label htmlFor="phone">Phone</label>
+                          <input id="phone" type="tel" placeholder={auth.phone ? auth.phone : 'phone number'} ref="phone" />
                         </div>
                       </div>
                       <div className="row margin">

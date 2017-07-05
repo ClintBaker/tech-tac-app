@@ -7,7 +7,7 @@ import moment from 'moment';
 import {Link} from 'react-router';
 
 import Nav from 'Nav';
-import SideNav from 'SideNav';
+import OrderDetailsAdmin from 'OrderDetailsAdmin';
 
 class OrderDetails extends React.Component {
   constructor(props) {
@@ -31,45 +31,48 @@ class OrderDetails extends React.Component {
     ))
   }
   render () {
-    var {orderDetails} = this.props;
-    return (
-      <div>
-        <Nav />
-        <div className="callout sticky columns small-2 medium-2 large-2 side-nav">
-          <SideNav />
+    var {orderDetails, auth} = this.props;
+    if (auth.isAdmin) {
+      return (
+        <OrderDetailsAdmin />
+      );
+    } else {
+      return (
+        <div>
+          <Nav />
+          <div className="small-offset-2 small-8 medium-offset-3 medium-6 large-offset-3 large-6 main padMain">
+            <div>
+              <Link className="button small" to="/orders">Back to orders</Link>
+            </div>
+            <div className="callout">
+              <h4 className="title-text">Order Number: {orderDetails._id}</h4>
+            </div>
+            <div className="callout">
+              <ul className="inlineList">
+                <li><span style={{fontWeight: 'bold'}}>Order status: </span>{orderDetails.status}</li>
+                <li><span style={{fontWeight: 'bold'}}>Order date: </span>{moment(Number(orderDetails.createdAt)).format("MMMM Do YYYY, h:mm a")}</li>
+              </ul>
+              <h5>Order parts:</h5>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Part</th>
+                    <th>ID</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.renderOrderParts()}
+                </tbody>
+              </table>
+              <h5 style={{fontWeight: 'bold'}}>Total: {orderDetails.total ? "$" + orderDetails.total.toLocaleString() : 'none'}</h5>
+            </div>
+          </div>
         </div>
-        <div className="small-offset-3 small-8 medium-offset-3 medium-6 large-offset-3 large-7 main">
-          <div>
-            <Link className="button small" to="/orders">Back to orders</Link>
-          </div>
-          <div className="callout">
-            <h4 className="title-text">Order Number: {orderDetails._id}</h4>
-          </div>
-          <div className="callout">
-            <ul className="inlineList">
-              <li><span style={{fontWeight: 'bold'}}>Order status: </span>{orderDetails.status}</li>
-              <li><span style={{fontWeight: 'bold'}}>Order date: </span>{moment(Number(orderDetails.createdAt)).format("MMMM Do YYYY, h:mm a")}</li>
-            </ul>
-            <h5>Order parts:</h5>
-            <table>
-              <thead>
-                <tr>
-                  <th>Part</th>
-                  <th>ID</th>
-                  <th>Price</th>
-                  <th>Quantity</th>
-                  <th>Subtotal</th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.renderOrderParts()}
-              </tbody>
-            </table>
-            <h5 style={{fontWeight: 'bold'}}>Total: {orderDetails.total ? "$" + orderDetails.total.toLocaleString() : 'none'}</h5>
-          </div>
-        </div>
-      </div>
-    );
+      );
+    }
   }
 }
 
@@ -77,7 +80,8 @@ export default connect(
   (state) => {
     return {
       orders: state.orders,
-      orderDetails: state.orderDetails
+      orderDetails: state.orderDetails,
+      auth: state.auth
     }
   }
 )(OrderDetails);
