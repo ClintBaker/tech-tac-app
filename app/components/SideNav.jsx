@@ -27,7 +27,7 @@ class SideNav extends React.Component {
             <li><Link to="/admin/products" activeClassName="active" activeStyle={{fontWeight: 'bold'}}><span style={{color: '#00457c'}}>Manage Products</span></Link></li>
             <li><Link to="/create/products" activeClassName="active" activeStyle={{fontWeight: 'bold'}}><span style={{color: '#00457c'}}>Create New Product</span></Link></li>
             <li><Link to="/orders/manage" activeClassName="active" activeStyle={{fontWeight: 'bold'}}><span style={{color: '#00457c'}}>Manage Orders</span></Link></li>
-            <li><Link to="/admin/products" activeClassName="active" activeStyle={{fontWeight: 'bold'}}><span style={{color: '#00457c'}}>Manage Users</span></Link></li>
+            <li><Link to="/users" activeClassName="active" activeStyle={{fontWeight: 'bold'}}><span style={{color: '#00457c'}}>Manage Users</span></Link></li>
           </ul>
         </div>
       );

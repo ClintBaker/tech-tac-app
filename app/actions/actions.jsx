@@ -190,6 +190,29 @@ export var startPopulateOrders = () => {
   };
 };
 
+export var populateUsers = (users) => {
+  return {
+    type: 'POPULATE_USERS',
+    users
+  }
+};
+
+export var startPopulateUsers = () => {
+  return (dispatch, getState) => {
+    var {auth} = getState();
+
+    return axios.get(`${baseURL}/users`, {
+      headers: {
+        'x-auth': auth.token
+      }
+    }).then((res) => {
+      dispatch(populateUsers(res.data.users));
+    }).catch((e) => {
+      console.log(e);
+    })
+  }
+};
+
 export var startPopulateOrdersAdmin = () => {
   return (dispatch, getState) => {
     var {auth} = getState();

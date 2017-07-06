@@ -12,6 +12,7 @@ import ManageProductsMain from 'ManageProductsMain';
 import CreateProducts from 'CreateProducts';
 import EditPart from 'EditPart';
 import AdminOrders from 'AdminOrders';
+import Users from 'Users';
 
 export default (
   <Router history={hashHistory}>
@@ -26,6 +27,7 @@ export default (
       <Route path="create/products" component={CreateProducts} />
       <Route path="edit/part" component={EditPart} />
       <Route path="orders/manage" component={AdminOrders}/>
+      <Route path="users" component={Users} />
       <IndexRoute component={Landing} />
     </Route>
   </Router>
