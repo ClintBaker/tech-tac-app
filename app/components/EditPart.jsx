@@ -2,6 +2,7 @@ import React from 'react';
 import * as Redux from 'react-redux';
 import * as actions from 'actions';
 import Dropzone from 'react-dropzone';
+import CategoryButton from 'CategoryButton';
 
 import Nav from 'Nav';
 
@@ -11,6 +12,7 @@ class CreateProducts extends React.Component {
     this.onSignup = this.onSignup.bind(this);
     this.onImageDrop = this.onImageDrop.bind(this);
     this.renderPreview = this.renderPreview.bind(this);
+    this.renderCategories = this.renderCategories.bind(this);
     this.state = {};
   }
   onImageDrop (files) {
@@ -43,6 +45,10 @@ class CreateProducts extends React.Component {
       part.price = this.refs.price.value;
     }
 
+    if (this.refs.category && this.refs.category.value.length > 1) {
+      part.categories = [...partDetails.categories, this.refs.category.value];
+    }
+
     dispatch(actions.startEditProduct(part, partDetails._id));
   }
   renderPreview() {
@@ -54,6 +60,16 @@ class CreateProducts extends React.Component {
           <img src={image.preview} style={{maxHeight: '100%', maxWidth: '100%'}}></img>
         </div>
       );
+    }
+  }
+  renderCategories() {
+    var {partDetails, dispatch} = this.props;
+    var num = 1;
+
+    if (partDetails && partDetails.categories) {
+      return partDetails.categories.map((cat) => (
+          <CategoryButton category={cat} key={cat} />
+      ));
     }
   }
   render () {
@@ -103,9 +119,19 @@ class CreateProducts extends React.Component {
                           <input id="price" type="number" placeholder="part price" ref="price" />
                         </div>
                       </div>
+                      <div className="row">
+                        <div className="large-12 columns">
+                          <label htmlFor="category">New Category</label>
+                          <input id="category" type="text" placeholder="add new category" ref="category" />
+                        </div>
+                      </div>
 
                       <button className="margin button expanded radiusDouble" style={{backgroundColor: '#00457c'}}>Submit Changes</button>
                     </form>
+                    <div className="row">
+                      <h5>Remove Categories</h5>
+                      {this.renderCategories()}
+                    </div>
                   </div>
             </div>
           </div>

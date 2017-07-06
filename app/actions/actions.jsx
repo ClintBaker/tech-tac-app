@@ -334,6 +334,30 @@ export var setPartDetails = (part) => {
   }
 };
 
+export var startEditProductCategories = (part, id) => {
+  return (dispatch, getState) => {
+    var {auth} = getState();
+    var partCategories;
+    if (part.categories && part.categories.length > 0) {
+      partCategories = part.categories;
+    } else {
+      partCategories = [];
+    }
+    part.categories = partCategories;
+    axios.patch(`${baseURL}/parts/${id}`, part, {
+      headers: {
+        'x-auth': auth.token
+      }
+    }).then((res) => {
+      alert('Category removed');
+      dispatch(startGetProducts());
+      hashHistory.push('/admin/products');
+    }).catch((e) => {
+      console.log(e);
+    });
+  }
+}
+
 export var startEditProduct = (part, id) => {
   return (dispatch, getState) => {
 
