@@ -22,7 +22,7 @@ class Products extends React.Component {
   }
   render () {
     return (
-      <div className="columns large-10">
+      <div className="columns large-10 small-7 medium-7">
         {this.renderProducts()}
       </div>
     );

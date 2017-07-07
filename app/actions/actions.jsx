@@ -90,6 +90,14 @@ export var getParts = (parts) => {
   }
 };
 
+export var populateSearchParts = (parts, category) => {
+  return {
+    type: 'POPULATE_SEARCH_PARTS',
+    parts,
+    category
+  }
+};
+
 export var startGetProducts = () => {
   return (dispatch, getState) => {
     const {auth} = getState();

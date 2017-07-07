@@ -89,3 +89,21 @@ export var usersReducer = (state = [], action) => {
     return state;
   }
 };
+
+export var searchPartsReducer = (state = [], action) => {
+  switch(action.type) {
+    case 'POPULATE_SEARCH_PARTS':
+      return action.parts;
+    default:
+      return state;
+  }
+};
+
+export var searchTermReducer = (state = '', action) => {
+  switch(action.type) {
+    case 'POPULATE_SEARCH_PARTS':
+      return action.category;
+    default:
+      return state;
+  }
+};
