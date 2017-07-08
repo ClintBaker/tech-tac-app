@@ -13,11 +13,23 @@ class Cart extends React.Component {
     super(props);
     this.submitOrder = this.submitOrder.bind(this);
     this.renderCartItems = this.renderCartItems.bind(this);
+    this.renderTotal = this.renderTotal.bind(this);
   }
   submitOrder(e) {
     e.preventDefault();
     var {dispatch, cart} = this.props;
     dispatch(actions.startNewOrder(cart));
+  }
+  renderTotal() {
+    var {cart} = this.props;
+    var total = 0;
+
+    cart.map((part) => {
+      total = total + (part.price * part.quantity);
+    });
+    return (
+      <h4 style={{paddingBottom: '15px', fontWeight: 'bold'}}>Total: ${total.toLocaleString()}</h4>
+    )
   }
   renderCartItems() {
     var {cart} = this.props;
@@ -28,6 +40,9 @@ class Cart extends React.Component {
             <div>
               <CartItems />
             </div>
+          </div>
+          <div className="row">
+            {this.renderTotal()}
           </div>
           <div className="row">
             <div>

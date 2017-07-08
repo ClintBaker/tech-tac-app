@@ -3,6 +3,7 @@ import * as Redux from 'react-redux';
 import * as actions from 'app/actions/actions';
 import {connect} from 'react-redux';
 import ManageProducts from 'ManageProducts';
+import {Spinner} from 'react-redux-spinner';
 
 import Nav from 'Nav';
 import SideNav from 'SideNav';

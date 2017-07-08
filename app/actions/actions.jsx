@@ -14,6 +14,7 @@ export var signup = (token, userData) => {
 
 export var startSignup = (user) => {
   return (dispatch, getState) => {
+    dispatch(beginLoading());
     return axios.post(`${baseURL}/users`, {
       email: user.email,
       password: user.password
@@ -23,18 +24,33 @@ export var startSignup = (user) => {
       var token = res.headers['x-auth'];
       var isAdmin = false;
       var userData = res.data
+      dispatch(finishLoading());
       dispatch(signup(token, userData));
       hashHistory.push('/main');
     })
     .catch((e) => {
       alert('unable to login');
+      dispatch(finishLoading());
       hashHistory.push('/signup');
     });
   }
 };
 
+export var beginLoading = () => {
+  return {
+    type: 'BEGIN_LOADING'
+  }
+};
+
+export var finishLoading = () => {
+  return {
+    type: 'FINISH_LOADING'
+  }
+};
+
 export var startLogin = (email, password) => {
   return (dispatch, getState) => {
+    dispatch(beginLoading());
     return axios.post(`${baseURL}/users/login`, {
       email: email,
       password: password
@@ -43,10 +59,12 @@ export var startLogin = (email, password) => {
       var isAdmin = res.data.isAdmin;
       var token = res.headers['x-auth'];
       var userData = res.data;
+      dispatch(finishLoading());
       dispatch(signup(token, userData));
       hashHistory.push('/main');
     }).catch((e) => {
       alert('unable to login');
+      dispatch(finishLoading());
       hashHistory.push('/');
     });
   }
@@ -61,14 +79,17 @@ export var logout = () => {
 export var startLogout = () => {
   return (dispatch, getState) => {
     const {auth} = getState();
+    dispatch(beginLoading());
     return axios.delete(`${baseURL}/users/me/token`, {
       headers: {'x-auth': `${auth.token}`}
     }).then((res) => {
       dispatch(logout());
+      dispatch(finishLoading());
       alert('Successfully logged out');
       hashHistory.push('/');
     }).catch((e) => {
-      alert(e);
+      dispatch(finishLoading());
+      console.log(e);
       hashHistory.push('/');
     })
   }
@@ -159,6 +180,7 @@ export var startNewOrder = (cart) => {
       total
     };
     var newData = JSON.stringify(data);
+    dispatch(beginLoading());
 
     return axios.post(`${baseURL}/orders`, data, {
       headers: {
@@ -168,8 +190,10 @@ export var startNewOrder = (cart) => {
       alert('Successfully placed order');
       dispatch(clearCart());
       dispatch(setOrderDetails(res.data));
+      dispatch(finishLoading());
       hashHistory.push('/orders/details');
     }).catch((e) => {
+      dispatch(finishLoading());
       alert('Unable to place order');
     });
   };
@@ -186,13 +210,16 @@ export var startPopulateOrders = () => {
   return (dispatch, getState) => {
     var {auth} = getState();
 
+    dispatch(beginLoading());
     return axios.get(`${baseURL}/orders`, {
       headers: {
         'x-auth': auth.token
       }
     }).then((res) => {
+      dispatch(finishLoading());
       dispatch(populateOrders(res.data.orders));
     }).catch((e) => {
+      dispatch(finishLoading());
       console.log(e);
     });
   };
@@ -209,13 +236,16 @@ export var startPopulateUsers = () => {
   return (dispatch, getState) => {
     var {auth} = getState();
 
+    dispatch(beginLoading());
     return axios.get(`${baseURL}/users`, {
       headers: {
         'x-auth': auth.token
       }
     }).then((res) => {
+      dispatch(finishLoading());
       dispatch(populateUsers(res.data.users));
     }).catch((e) => {
+      dispatch(finishLoading());
       console.log(e);
     })
   }
@@ -225,13 +255,16 @@ export var startPopulateOrdersAdmin = () => {
   return (dispatch, getState) => {
     var {auth} = getState();
 
+    dispatch(beginLoading());
     return axios.get(`${baseURL}/orders/all`, {
       headers: {
         'x-auth': auth.token
       }
     }).then((res) => {
+      dispatch(finishLoading());
       dispatch(populateOrders(res.data.orders));
     }).catch((e) => {
+      dispatch(finishLoading());
       console.log(e);
     });
   };
@@ -255,14 +288,17 @@ export var editOrderDetails = (order) => {
   return (dispatch, getState) => {
     var {auth} = getState();
 
+    dispatch(beginLoading());
     return axios.patch(`${baseURL}/orders/${order._id}`, order, {
       headers: {
         'x-auth': auth.token
       }
     }).then((res) => {
       dispatch(startPopulateOrdersAdmin);
+      dispatch(finishLoading());
       hashHistory.push('/orders/manage');
     }).catch((e) => {
+      dispatch(finishLoading());
       console.log(e);
     });
   }
@@ -272,15 +308,18 @@ export var startUpdateUser = (userData) => {
   return (dispatch, getState) => {
     var {auth} = getState();
 
+    dispatch(beginLoading());
     return axios.patch(`${baseURL}/users/${auth.id}`, userData, {
       headers: {
         'x-auth': auth.token
       }
     }).then((res) => {
       dispatch(signup(auth.token, res.data.user));
+      dispatch(finishLoading());
       alert('Information updated successfully');
       hashHistory.push('/main');
     }).catch((e) => {
+      dispatch(finishLoading());
       console.log(e);
     });
   }
@@ -288,6 +327,7 @@ export var startUpdateUser = (userData) => {
 
 export var startCreateProduct = (product) => {
   return (dispatch, getState) => {
+    dispatch(beginLoading());
     const CLOUDINARY_UPLOAD_PRESET = 'b4ydmdnn';
     const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dmkyqvixg/image/upload';
 
@@ -306,12 +346,15 @@ export var startCreateProduct = (product) => {
             'x-auth': auth.token
           }
         }).then((res) => {
+          dispatch(finishLoading());
           alert('Product created');
           hashHistory.push('/admin/products');
         }).catch((e) => {
+          dispatch(finishLoading());
           console.log(e);
         });
       } else {
+        dispatch(finishLoading());
         alert('unable to upload image');
       }
     });
@@ -321,15 +364,18 @@ export var startCreateProduct = (product) => {
 export var startDeletePart = (id) => {
   return (dispatch, getState) => {
     var {auth} = getState();
+    dispatch(beginLoading());
     axios.delete(`${baseURL}/parts/${id}`, {
       headers: {
         'x-auth': auth.token
       }
     }).then((res) => {
       dispatch(startGetProducts());
+      dispatch(finishLoading());
       alert('Part deleted');
       hashHistory.push('/admin/products');
     }).catch((e) => {
+      dispatch(finishLoading());
       alert('Unable to delete product');
     });
   }
@@ -352,15 +398,18 @@ export var startEditProductCategories = (part, id) => {
       partCategories = [];
     }
     part.categories = partCategories;
+    dispatch(beginLoading());
     axios.patch(`${baseURL}/parts/${id}`, part, {
       headers: {
         'x-auth': auth.token
       }
     }).then((res) => {
+      dispatch(finishLoading());
       alert('Category removed');
       dispatch(startGetProducts());
       hashHistory.push('/admin/products');
     }).catch((e) => {
+      dispatch(finishLoading());
       console.log(e);
     });
   }
@@ -368,6 +417,7 @@ export var startEditProductCategories = (part, id) => {
 
 export var startEditProduct = (part, id) => {
   return (dispatch, getState) => {
+    dispatch(beginLoading());
 
     if (part.image) {
       const CLOUDINARY_UPLOAD_PRESET = 'b4ydmdnn';
@@ -388,27 +438,33 @@ export var startEditProduct = (part, id) => {
               'x-auth': auth.token
             }
           }).then((res) => {
+            dispatch(finishLoading());
             alert('Part edited');
             dispatch(startGetProducts());
             hashHistory.push('/admin/products');
           }).catch((e) => {
+            dispatch(finishLoading());
             console.log(e);
           });
         } else {
+          dispatch(finishLoading());
           alert('unable to upload image');
         }
       });
     } else {
       var {auth} = getState();
+      dispatch(beginLoading());
       axios.patch(`${baseURL}/parts/${id}`, part, {
         headers: {
           'x-auth': auth.token
         }
       }).then((res) => {
+        dispatch(finishLoading());
         dispatch(startGetProducts());
         alert('Part edited');
         hashHistory.push('/admin/products');
       }).catch((e) => {
+        dispatch(finishLoading());
         alert('Unable to edit part');
       });
     }

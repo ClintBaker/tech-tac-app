@@ -43,7 +43,7 @@ class PartsSearch extends React.Component {
           {/* <div className="callout sticky columns small-2 medium-2 large-2 side-nav">
             <SideNav />
           </div> */}
-          <div className="small-offset-2 small-8 medium-offset-3 large-offset-3 medium-6 large-6 main">
+          <div className="small-offset-2 small-9 medium-offset-2 large-offset-2 medium-8 large-8 main">
             <div className="callout">
               <h2 className="title-text">Products</h2>
             </div>

@@ -50,7 +50,6 @@ class CreateProducts extends React.Component {
         {/* <div className="bg-color"></div> */}
         <Nav />
         <div className="small-centered small-offset-2 medium-offset-3 large-offset-3 small-8 medium-6 large-6 center signup padMain">
-
           <div>
             <div className="radiusDouble">
               <h2 className="title-text centered">Create Products</h2>

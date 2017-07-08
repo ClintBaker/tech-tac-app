@@ -1,7 +1,7 @@
 import * as redux from 'redux';
 import thunk from 'redux-thunk';
 
-import {authReducer, partsReducer, cartReducer, ordersReducer, orderDetailsReducer, partDetailsReducer, usersReducer, searchPartsReducer, searchTermReducer} from 'reducers';
+import {authReducer, partsReducer, cartReducer, ordersReducer, orderDetailsReducer, partDetailsReducer, usersReducer, searchPartsReducer, searchTermReducer, pendingTasksReducer} from 'reducers';
 
 export var configure = (initialState = {}) => {
   var reducer = redux.combineReducers({
@@ -13,7 +13,8 @@ export var configure = (initialState = {}) => {
     partDetails: partDetailsReducer,
     users: usersReducer,
     searchParts: searchPartsReducer,
-    searchTerm: searchTermReducer
+    searchTerm: searchTermReducer,
+    pendingTasks: pendingTasksReducer
   });
 
 

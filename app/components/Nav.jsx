@@ -3,6 +3,7 @@ import * as Redux from 'react-redux';
 import * as actions from 'app/actions/actions';
 import {connect} from 'react-redux';
 import {Link, IndexLink} from 'react-router';
+import {Spinner} from 'react-redux-spinner';
 
 import SideNav from 'SideNav';
 
@@ -44,6 +45,7 @@ class Nav extends React.Component {
   render () {
     return (
       <div className="blueMainBg">
+        <Spinner />
         <div className="top-bar blueMainBg" style={{position: 'fixed', zIndex: '101', width: '100%', top: '0'}}>
           <div className="top-bar-left blueMainBg" style={{cursor: 'pointer'}} onClick={this.onClick}>
             <div className="menu-bar"></div>

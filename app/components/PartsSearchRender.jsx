@@ -22,7 +22,7 @@ class PartsSearchRender extends React.Component {
   }
   render () {
     return (
-      <div className="columns large-10 medium-7 small-7">
+      <div className="columns large-9 medium-7 small-7">
         {this.renderProducts()}
       </div>
     );

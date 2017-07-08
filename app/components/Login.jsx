@@ -2,6 +2,7 @@ import React from 'react';
 import * as Redux from 'react-redux';
 import * as actions from 'actions';
 import {Link} from 'react-router';
+import {Spinner} from 'react-redux-spinner';
 
 class Login extends React.Component {
   constructor (props) {
@@ -20,6 +21,7 @@ class Login extends React.Component {
   render () {
     return (
       <div className="center">
+        <Spinner />
         <img className="margin" style={{marginBottom: '20px'}} src="http://techtacco.com/skin/frontend/techtacco/default/images/logo.png"/>
         <form className="margin" onSubmit={this.onLogin}>
           <input className="radius" type="text" placeholder="email" ref="email" style={{borderColor: '#a9a9a9'}}/>

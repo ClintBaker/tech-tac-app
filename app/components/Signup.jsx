@@ -2,6 +2,7 @@ import React from 'react';
 import * as Redux from 'react-redux';
 import * as actions from 'actions';
 import {Link} from 'react-router';
+import {Spinner} from 'react-redux-spinner';
 
 class Signup extends React.Component {
   constructor (props) {
@@ -108,6 +109,7 @@ class Signup extends React.Component {
     return (
 
       <div className="small-centered small-10 medium-6 large-4 center signup">
+        <Spinner />
         <div className="bg-color"></div>
         <div>
           <div className="callout radiusDouble">

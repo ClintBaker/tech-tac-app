@@ -21,7 +21,7 @@ class SideNav extends React.Component {
 
     if(auth.isAdmin) {
       return (
-        <div>
+        <div className="padMain">
           <h5>Admin Panel</h5>
           <ul className="menu vertical">
             <li><Link to="/admin/products" activeClassName="active" activeStyle={{fontWeight: 'bold'}}><span style={{color: '#00457c'}}>Manage Products</span></Link></li>

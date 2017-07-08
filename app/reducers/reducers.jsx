@@ -107,3 +107,14 @@ export var searchTermReducer = (state = '', action) => {
       return state;
   }
 };
+
+export var pendingTasksReducer = (state = 0, action) => {
+  switch(action.type) {
+    case 'BEGIN_LOADING':
+      return 1;
+    case 'FINISH_LOADING':
+      return 0;
+    default:
+      return state;
+  }
+}

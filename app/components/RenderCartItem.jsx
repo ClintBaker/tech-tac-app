@@ -20,7 +20,7 @@ class RenderCartItem extends React.Component {
       <tr key={part._id}>
         <td>{part._partId}</td>
         <td>{part.quantity}</td>
-        <td>$1500</td>
+        <td>${(part.price * part.quantity).toLocaleString()}</td>
         <td><button className="button small alert" onClick={this.removeFromCart}>Remove from cart</button></td>
       </tr>
     );

@@ -22,6 +22,7 @@
     "react-dropzone": "^3.13.3",
     "react-moment": "^0.2.4",
     "react-redux": "^5.0.5",
+    "react-redux-spinner": "^0.7.2",
     "react-router": "^2.0.0",
     "redux": "^3.7.0",
     "redux-thunk": "^2.2.0",
