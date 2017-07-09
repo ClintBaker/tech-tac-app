@@ -17,7 +17,12 @@ export var startSignup = (user) => {
     dispatch(beginLoading());
     return axios.post(`${baseURL}/users`, {
       email: user.email,
-      password: user.password
+      password: user.password,
+      companyName: user.companyName,
+      phone: user.phone,
+      url: user.url,
+      contactName: user.contactName,
+      address: user.address
     })
     .then((res) => {
       var id = res.data._id;
